@@ -78,6 +78,7 @@ The local server runs over HTTP at `0.0.0.0:8000`. The Vercel ASGI entrypoint is
 - Never commit `.env`, API keys, or tokens. Use `.env.example` as the template.
 - Don't introduce unnecessary dependencies that can be avoided with simple work-arounds.
 - Preserve the security posture: validate all incoming headers and payloads; treat all input as untrusted.
+- Frontend assets (e.g., `frontend/assets/supabase.js`) should read Supabase credentials from environment variables rather than hardcoding them.
 - Test the code after any changes are made.
 - Match existing style: plain functions, docstrings written as tool descriptions for LLM consumers, inline `# TODO:` comments for unfinished work.
 - Update `README.md` / `TODO` when adding features that change scope.
