@@ -40,7 +40,13 @@ Clone the repository
 
 ---
 
+*cd in frontend*, in assets/supabase.js add your:
 
+```supabase_url and supabase_publishable_key``` 
+
+Then from root **frontend/** run ```npx serve .``` or any other method to serve/execute index.html 
+
+This opens up the frontend/website
 
 ---
 
