@@ -36,6 +36,8 @@ Get Phloem now through the [website](https://phloem-ai.netlify.app)
 
 Clone the repository
 
+---
+
 1. **Frontend**
 
 ---
