@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+    <title>Phloem AI — Connect Agents</title>
+    <meta name="description" content="Authenticated Phloem agent connection dashboard." />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <style>html.auth-pending body { visibility: hidden; }</style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+    <script>
+        // Keep protected content hidden until Supabase has resolved the session.
+        document.documentElement.classList.add('auth-pending');
+        (async () => {
+            const client = typeof getSupabaseClient === 'function' ? getSupabaseClient() : null;
+            if (!client) { window.location.replace('./sign-up.html'); return; }
+            const { data, error } = await client.auth.getSession();
+            if (error || !data.session) { window.location.replace('./sign-up.html'); return; }
+            document.documentElement.classList.remove('auth-pending');
+        })();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        gtag('js', new Date());
+        gtag('config', 'G-W1DRVC1WTR');
+    </script>
+
+    <link rel="stylesheet" href="../assets/guides.css" />
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100%; }
+        body { background: #000; color: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
+        .page-shell { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 4rem; }
+        .hero { min-height: 80vh; display:flex; align-items:center; justify-content:center; }
+        .container { width:100%; text-align:center; padding:4rem 2rem; border:1px solid #333; background:#000; }
+        .logo { display:inline-block; border:1px solid rgba(255,255,255,.22); padding:.45rem .8rem; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; margin-bottom:1.7rem; color:rgba(255,255,255,.75); border-radius:999px; }
+        .text-container {
+            max-width: 700px;    /* Invisible box width */
+            width: 90%;          /* Responsive on smaller screens */
+            margin: 50px auto;   /* Center horizontally with top spacing */
+        }
+
+        .text-container p {
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        .text-container-link {
+            color: rgba(255,255,255,.92);
+            text-decoration: underline;
+            text-decoration-color: rgba(255,255,255,.5);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color .2s ease, text-decoration-color .2s ease;
+        }
+        .text-container-link:hover,
+        .text-container-link:focus-visible {
+            color: #fff;
+            text-decoration-color: #fff;
+        }
+        h1 { font-size: clamp(2.2rem, 4vw, 3rem); font-weight:700; margin-bottom:1.6rem; }
+        h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom:1rem; color:#fff; }
+        p { color: rgba(255,255,255,.72); line-height:1.8; font-size:1rem; }
+        .top-right-actions { display:flex; justify-content:space-between; gap:1rem; width:100%; margin-bottom:.6rem; }
+        .hero-actions { display:none; }
+        a.home { color:rgba(255,255,255,.65); }
+        .btn { padding:.9rem 1.25rem; text-decoration:none; border:1px solid #444; transition: background .2s ease, color .2s ease, border-color .2s ease; font-size:.95rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; background:transparent; color:#fff; border-radius:999px; }
+        .btn:hover { background:#fff; color:#000; }
+        .btn-primary { background:#fff; color:#000; border-color:#fff; }
+        .btn-secondary { background:#000000; color:#df0000; border-color:#df0000; }
+        .btn-secondary:hover { background:#df0000; color:#fff; }
+        .copy-card { border:1px solid #262626; padding:1.75rem; text-align:left; margin:0 auto 2rem; max-width:720px; background:rgba(255,255,255,.02); border-radius:28px; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+        .copy-label { display:block; font-size:.8rem; letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:.75rem; }
+        .copy-link { position:relative; display:flex; align-items:center; }
+        .copy-link input { width:100%; background:#111; border:1px solid #333; border-radius:24px; color:#fff; padding:16px 130px 16px 18px; font-size:1rem; }
+        .copy-link button { position:absolute; right:10px; top:50%; transform:translateY(-50%); background:#272727; border:1px solid #333; color:#fff; border-radius:999px; padding:.8rem 1rem; font-size:.95rem; }
+        .copy-link button:hover { background:#3a3a3a; }
+        .copy-api-button { position:absolute; right:25px; top:67%; transform:translateY(-50%); background:#272727; border:1px solid #333; color:#fff; border-radius:999px; padding:.8rem 1rem; font-size:.95rem; }
+        .copy-api-button:hover { background:#3a3a3a; }
+        .create-key-button { background:#272727; border:1px solid #333; color:#fff; border-radius:999px; padding:.8rem 1rem; font-size:.95rem; cursor:pointer; }
+        .create-key-button:hover { background:#3a3a3a; }
+        .api-key-content[hidden] { display:none; }
+        .panel-list { display:grid; gap:1rem; max-width:720px; margin:0 auto; text-align:left; }
+        .panel-item { background:rgb(0, 0, 0); border: 2px solid rgb(17, 17, 17); border-radius:24px; overflow:hidden; }
+        .panel-summary { border: none; background:transparent; width:100%; text-align:left; padding:1.25rem 1.5rem; display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+        .panel-summary:hover { background:rgba(255,255,255,.05); }
+        .panel-title { font-size:1rem; font-weight:600; color:#fff; }
+        .panel-toggle { transition: transform .2s ease; color: rgba(255,255,255,.65); font-size:1.25rem; }
+        .panel-toggle.open { transform: rotate(90deg); }
+        .panel-body { display:none; border-top:1px solid rgba(255,255,255,.08); padding:1.5rem; gap:1rem; background:rgba(255,255,255,.015); }
+        .panel-body.open { display:grid; }
+        .panel-block { position:relative; border:1px solid rgba(255,255,255,.08); background:#0d0d0d; padding:1.25rem; border-radius:18px; }
+        .panel-block h3 { font-size:1rem; margin-bottom:.75rem; }
+        .panel-block p { color:rgba(255,255,255,.75); }
+        .panel-block input { width:100%; background:#111; border:1px solid #222; color:#fff; padding:14px 110px 14px 16px; font-size:1rem; margin-top:.5rem; border-radius:14px; }
+        .panel-block textarea { width:100%; min-height:100px; max-height: fit-content; background:#111; border:1px solid #222; color:#fff; padding:14px 16px; font-size:1rem; resize:none; border-radius:14px; }
+        .small-text { font-size:.95rem; color:rgba(255,255,255,.7); margin-top:.5rem; }
+        ::selection {
+            background: #fff;
+            color: #000;
+        }
+        footer { margin-top:2.5rem; color:rgba(255,255,255,.35); font-size:.8rem; text-align:center; letter-spacing:.14em; text-transform:uppercase; }
+        @media (max-width:700px) { .container { padding:2rem 1.5rem; border-radius:20px; } .copy-link input { width:100%; } .panel-block textarea { width:100%; min-height:100px; max-height: fit-content;} }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <section class="hero">
+            <main class="container">
+                <div class="top-right-actions">
+                    <a class="home" href="../index.html">← Back to home</a>
+                    <button class="btn btn-secondary" type="button" onclick="handleSignOut()">Logout</button>
+                </div>
+                <h1>Connect Your Agents</h1>
+
+                <div class="text-container">
+                    <p>
+                        Use the connection link below and select agents to connect, use their API keys and setup <a href="../index.html#about" class="text-container-link" target="_blank">instructions</a> to connect them.
+                        See the <a href="./about.html" class="text-container-link" target="_blank">user manual</a> for guidance.
+                    </p>
+                        <br/>
+                    <p>Reach out to <a href="mailto:qasimhassan1947@gmail.com" target="_blank" class="text-container-link">support</a> team for futher assistance.</p>
+                </div>
+
+                <div class="copy-card">
+                    <span class="copy-label">Connection link</span>
+                    <div class="copy-link">
+                        <input id="agent-connection-link" type="text" readonly aria-label="Copy agent connection link" />
+                        <button type="button" id="copy-link-button">Copy</button>
+                    </div>
+                </div>
+
+                <div class="panel-list">
+                    <div class="panel-item">
+                        <button class="panel-summary" type="button">
+                            <span class="panel-title">Codex</span>
+                            <span class="panel-toggle">+</span>
+                        </button>
+                        <div class="panel-body">
+                            <div class="panel-block">
+                                <h3>API Key</h3>
+                                <button type="button" class="create-key-button">Create KEY</button>
+                                <div class="api-key-content" hidden>
+                                    <input type="text" readonly aria-label="Codex API key" />
+                                    <button type="button" class="copy-api-button">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-item">
+                        <button class="panel-summary" type="button">
+                            <span class="panel-title">Gemini</span>
+                            <span class="panel-toggle">+</span>
+                        </button>
+                        <div class="panel-body">
+                            <div class="panel-block">
+                                <h3>API Key</h3>
+                                <button type="button" class="create-key-button">Create KEY</button>
+                                <div class="api-key-content" hidden>
+                                    <input type="text" readonly aria-label="Gemini API key" />
+                                    <button type="button" class="copy-api-button">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-item">
+                        <button class="panel-summary" type="button">
+                            <span class="panel-title">Cursor</span>
+                            <span class="panel-toggle">+</span>
+                        </button>
+                        <div class="panel-body">
+                            <div class="panel-block">
+                                <h3>API Key</h3>
+                                <button type="button" class="create-key-button">Create KEY</button>
+                                <div class="api-key-content" hidden>
+                                    <input type="text" readonly aria-label="Cursor API key" />
+                                    <button type="button" class="copy-api-button">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-item">
+                        <button class="panel-summary" type="button">
+                            <span class="panel-title">Claude Code</span>
+                            <span class="panel-toggle">+</span>
+                        </button>
+                        <div class="panel-body">
+                            <div class="panel-block">
+                                <h3>API Key</h3>
+                                <button type="button" class="create-key-button">Create KEY</button>
+                                <div class="api-key-content" hidden>
+                                    <input type="text" readonly aria-label="Claude Code API key" />
+                                    <button type="button" class="copy-api-button">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-item">
+                        <button class="panel-summary" type="button">
+                            <span class="panel-title">OpenCode</span>
+                            <span class="panel-toggle">+</span>
+                        </button>
+                        <div class="panel-body">
+                            <div class="panel-block">
+                                <h3>API Key</h3>
+                                <button type="button" class="create-key-button">Create KEY</button>
+                                <div class="api-key-content" hidden>
+                                    <input type="text" readonly aria-label="OpenCode API key" />
+                                    <button type="button" class="copy-api-button">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-item">
+                        <button class="panel-summary" type="button">
+                            <span class="panel-title">VS Code Copilot</span>
+                            <span class="panel-toggle">+</span>
+                        </button>
+                        <div class="panel-body">
+                            <div class="panel-block">
+                                <h3>API Key</h3>
+                                <button type="button" class="create-key-button">Create KEY</button>
+                                <div class="api-key-content" hidden>
+                                    <input type="text" readonly aria-label="VS Code Copilot API key" />
+                                    <button type="button" class="copy-api-button">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI  
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script>
+        const supabase_cl = getSupabaseClient();
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            if (!supabase_cl) {
+                alert('Supabase is not configured.');
+                return;
+            }
+
+            const { data: sessionData, error: sessionError } = await supabase_cl.auth.getSession();
+            const session = sessionData?.session;
+
+            if (sessionError || !session) {
+                window.location.href = "./sign-up.html";
+                return;
+            }
+
+            const linkInput = document.getElementById('agent-connection-link');
+            const copyButton = document.getElementById('copy-link-button');
+            const currentLink = "https://phloem-core.vercel.app/mcp";
+
+            linkInput.value = currentLink;
+
+            copyButton.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(currentLink);
+                    copyButton.textContent = 'Copied';
+                    setTimeout(() => { copyButton.textContent = 'Copy'; }, 1800);
+                } catch (err) {
+                    copyButton.textContent = 'Copy failed';
+                }
+            });
+
+            const showApiKey = (button, apiKey) => {
+                const content = button.parentElement.querySelector('.api-key-content');
+                const input = content.querySelector('input');
+                input.value = apiKey;
+                content.hidden = false;
+                button.hidden = true;
+            };
+
+            const loadAgentKeys = async () => {
+                const { data: agents, error } = await supabase_cl
+                    .from('Agents')
+                    .select('agent_id, agent_name')
+                    .eq('user_id', session.user.id);
+
+                if (error) {
+                    console.error('Unable to load agent API keys:', error);
+                    return;
+                }
+
+                document.querySelectorAll('.panel-item').forEach((panel) => {
+                    const agentName = panel.querySelector('.panel-title').textContent.trim();
+                    const agent = agents.find((row) => row.agent_name === agentName);
+                    if (agent) {
+                        showApiKey(panel.querySelector('.create-key-button'), agent.agent_id);
+                    }
+                });
+            };
+
+            document.querySelectorAll('.create-key-button').forEach((button) => {
+                button.addEventListener('click', async () => {
+                    const panel = button.closest('.panel-item');
+                    const agentName = panel.querySelector('.panel-title').textContent.trim();
+                    button.disabled = true;
+                    button.textContent = 'Creating...';
+
+                    const { data: agent, error } = await supabase_cl
+                        .from('Agents')
+                        .insert({ user_id: session.user.id, agent_name: agentName })
+                        .select('agent_id, agent_name')
+                        .single();
+
+                    if (error) {
+                        console.error('Unable to create agent API key:', error);
+                        button.disabled = false;
+                        button.textContent = 'Create KEY';
+                        alert('Unable to create an API key. Please try again.');
+                        return;
+                    }
+
+                    showApiKey(button, agent.agent_id);
+                });
+            });
+
+            await loadAgentKeys();
+
+            document.querySelectorAll('.copy-api-button').forEach((button) => {
+                button.addEventListener('click', async () => {
+                    const input = button.parentElement.querySelector('input');
+
+                    try {
+                        await navigator.clipboard.writeText(input.value);
+
+                        button.textContent = 'Copied';
+
+                        setTimeout(() => {
+                            button.textContent = 'Copy';
+                        }, 1800);
+
+                    } catch (err) {
+                        button.textContent = 'Copy failed';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.panel-summary').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const item = button.closest('.panel-item');
+                    const body = item.querySelector('.panel-body');
+                    const icon = button.querySelector('.panel-toggle');
+                    const isOpen = body.classList.toggle('open');
+                    icon.classList.toggle('open', isOpen);
+                    icon.textContent = isOpen ? '-' : '+';
+                });
+            });
+        });
+
+        const handleSignOut = async () => {
+            if (!supabase_cl) {
+                alert('Supabase is not configured.');
+                return;
+            }
+            const { error } = await supabase_cl.auth.signOut();
+            if (error) {
+                alert('Error signing out: ' + error.message);
+            } else {
+                window.location.href = './sign-up.html';
+            }
+        };
+    </script>
+</body>
+</html>

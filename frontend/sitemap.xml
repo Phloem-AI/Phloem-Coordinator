@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://phloem-ai.netlify.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/about.html</loc><priority>0.7</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/claude.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/codex.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/cursor.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/gemini.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/linear-agents.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/opencode.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/salesforce-agent.html</loc><priority>0.6</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/vscode-copilot.html</loc><priority>0.6</priority></url>
+</urlset>

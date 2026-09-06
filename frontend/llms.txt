@@ -1,0 +1,24 @@
+# Phloem AI
+
+> Phloem is a secure multi-agent orchestration layer for semantic agent handoffs, agent collaboration, and coordinated AI workflows.
+
+## What Phloem does
+
+- Coordinates handoffs between AI agents across vendors.
+- Helps agents share context while preserving workflow boundaries.
+- Provides a remote MCP connection for supported agent clients.
+- Publishes setup guides for Codex, Claude Code, Cursor, Gemini, Linear Agents, OpenCode, Salesforce Agentforce, and VS Code Copilot.
+
+## Machine-readable resources
+
+- Website: https://phloem-ai.netlify.app/
+- Documentation: https://phloem-ai.netlify.app/pages/about.html
+- Repository: https://github.com/Phloem-AI/Phloem-core
+- MCP endpoint: https://phloem-core.vercel.app/mcp
+- Sitemap: https://phloem-ai.netlify.app/sitemap.xml
+- Robots policy: https://phloem-ai.netlify.app/robots.txt
+- Agent metadata: https://phloem-ai.netlify.app/agent.json
+
+## Important scope
+
+The website is a static frontend. The MCP endpoint is a separate service. Agents should follow the relevant setup guide and use the MCP endpoint only with credentials supplied by the operator.

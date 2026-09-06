@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>VS Code Copilot MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/vscode-copilot.html" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect a remote MCP server to GitHub Copilot Chat in VS Code." />
+  <meta name="keywords" content="VS Code Copilot MCP setup, remote MCP VS Code, mcp.json, GitHub Copilot MCP" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in VS Code Copilot" />
+  <meta property="og:description" content="Learn how to configure and use a remote MCP server with GitHub Copilot Chat in VS Code." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/vscode-copilot.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+    <section id="about" class="content-section">
+      <div class="content-card">
+        <a class="home" href="../index.html">← Back to home</a>
+        <h2>Connecting Remote MCP in VS Code Copilot</h2>
+        <p class="guide-intro">VS Code can expose remote MCP tools to GitHub Copilot Chat. This guide configures a server in the workspace <code>.vscode/mcp.json</code> file using Streamable HTTP.</p>
+
+        <div class="guide-step">
+          <h3>1. Gather your server details</h3>
+          <p>Collect the MCP endpoint URL, such as <code>https://example.com/mcp</code>, and the authentication method required by the server. The example below uses a bearer token.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>2. Create the MCP configuration</h3>
+          <p>In your workspace, create or open <code>.vscode/mcp.json</code>. For a user-wide server, run <strong>MCP: Open User Configuration</strong> from the Command Palette instead.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>3. Add the remote server</h3>
+          <p>Use the VS Code configuration schema with a <code>servers</code> object:</p>
+          <pre><code>{
+  "servers": {
+    "my-server": {
+      "type": "http",
+      "url": "https://example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${input:myMcpToken}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "myMcpToken",
+      "description": "MCP bearer token",
+      "password": true
+    }
+  ]
+}</code></pre>
+          <p>Input variables keep the token out of source control. VS Code also supports environment variables and other configuration reference forms.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>4. Start the server and review trust</h3>
+          <p>Save <code>mcp.json</code>. Use the inline controls in the file, the MCP view in Extensions, or <strong>MCP: List Servers</strong> from the Command Palette to start it. Review the configuration and confirm that you trust the server.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>5. Use and troubleshoot the tools</h3>
+          <p>Open Chat and ask Copilot to use the server:</p>
+          <pre><code>Use the my-server tools to inspect the current project status.</code></pre>
+          <p>Use <strong>Configure Tools</strong> to select available tools. If a server fails, select its error indicator or use <strong>MCP: List Servers → Show Output</strong> to view logs.</p>
+        </div>
+
+        <div class="guide-callout">
+          <strong>Tip:</strong> Remote MCP servers are configured with <code>type: "http"</code> in VS Code. Local command-based servers use <code>type: "stdio"</code>. Only add servers you trust, and keep credentials in input variables or environment configuration.
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 • Phloem AI</footer>
+    <footer>Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a></footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/supabase.js"></script>
+</body>
+</html>

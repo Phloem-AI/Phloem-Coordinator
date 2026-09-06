@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>Gemini CLI MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/gemini.html" />
+    
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+    <meta name="description" content="Step-by-step guide to connect a remote MCP server to Gemini CLI using Streamable HTTP or SSE." />
+    <meta name="keywords" content="remote MCP, Gemini MCP setup, Gemini CLI MCP, MCP HTTP server, MCP SSE server" />
+  <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="Connect a Remote MCP Server in Gemini CLI" />
+    <meta property="og:description" content="Learn how to connect a remote MCP server over Streamable HTTP or SSE to Gemini CLI." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/gemini.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+
+<body>
+    <div class="page-shell">
+
+        <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+        <section id="about" class="content-section">
+            <div class="content-card">
+                <a class="home" href="../index.html">← Back to home</a>
+                <h2>Connecting Remote MCP in Gemini CLI</h2>
+
+                <p class="guide-intro">
+                    Gemini CLI can connect to remote MCP servers over Streamable HTTP or SSE. This guide covers adding a server, authenticating it, and testing the connection.
+                </p>
+
+                <div class="guide-step">
+                    <h3>1. Gather your server details</h3>
+                    <p>Collect the MCP endpoint URL from your server provider. Most remote servers expose a single endpoint, for example <code>https://example.com/mcp</code>. Note whether the server requires a bearer token, API key, or OAuth access token.</p>
+                </div>
+
+                <div class="guide-step">
+                                        <h3>2. Add the server with the CLI</h3>
+                                        <p>Run this command from your terminal. Gemini CLI writes the server to the project configuration by default:</p>
+                                        <pre><code>gemini mcp add --transport http my-server https://example.com/mcp</code></pre>
+                                        <p>Use <code>--scope user</code> for a global server, or add <code>--header "Authorization: Bearer YOUR_TOKEN"</code> for a static bearer token.</p>
+                                        <p>You can also edit <code>~/.gemini/settings.json</code> or a project-level <code>.gemini/settings.json</code> directly. Use <code>httpUrl</code> for Streamable HTTP and <code>url</code> for SSE:</p>
+                    <pre><code>{
+  "mcpServers": {
+    "my-server": {
+            "httpUrl": "https://example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_TOKEN"
+      }
+    }
+  }
+}</code></pre>
+                    <p>For SSE, replace <code>httpUrl</code> with <code>url</code> and use the server's SSE endpoint. Keep real credentials out of the file by using environment-variable expansion in headers where appropriate.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>3. Authenticate (if required)</h3>
+                    <p>For an OAuth-enabled server, omit static bearer headers. Gemini CLI can discover OAuth metadata after a <code>401</code> response. Use <code>/mcp auth</code> or <code>/mcp auth my-server</code> during an interactive session to start or manage authentication.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>4. Restart and verify</h3>
+                    <p>Run <code>gemini mcp list</code> to inspect configured servers and connection status. Inside an interactive session, use <code>/mcp</code> to view discovered tools. If it shows as failed, verify the URL, transport, and token.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>5. Test the connection</h3>
+                    <p>Start a new session and ask Gemini CLI to use the connected tools:</p>
+                    <pre><code>Use the my-server tools to look up information from example.com</code></pre>
+                    <p>If the connection works, Gemini CLI will ask for confirmation when required, invoke the tool, and return its result.</p>
+                </div>
+
+                <div class="guide-callout">
+                    <strong>Tip:</strong> Gemini CLI supports <code>includeTools</code> and <code>excludeTools</code> in a server entry to control which tools are exposed. Its <code>trust</code> option bypasses tool-call confirmations, so enable it only for servers you fully control.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+</body>
+</html>

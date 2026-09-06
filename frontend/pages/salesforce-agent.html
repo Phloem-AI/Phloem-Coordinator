@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>Salesforce Agentforce MCP Setup Guide</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/salesforce-agent.html" />
+    
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect any remote MCP server (HTTP/SSE) to Salesforce Agentforce." />
+  <meta name="keywords" content="remote MCP, Salesforce Agent MCP setup, Agentforce MCP, Salesforce MCP integration, MCP HTTP server, MCP SSE server" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in Salesforce Agentforce" />
+  <meta property="og:description" content="Learn how to connect any remote MCP server over HTTP or SSE to Salesforce Agentforce." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/salesforce-agent.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+
+<body>
+    <div class="page-shell">
+
+        <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+        <section id="about" class="content-section">
+            <div class="content-card">
+                <a class="home" href="../index.html">← Back to home</a>
+                <h2>Connecting Remote MCP in Salesforce Agent</h2>
+
+                <p class="guide-intro">
+                    Salesforce Agentforce can connect to any remote MCP server to bring external tools, data sources, and workflows directly into your Salesforce environment. This guide covers the setup using Salesforce's external tools integration.
+                </p>
+
+                <div class="guide-step">
+                    <h3>1. Open your Salesforce Agent settings</h3>
+                    <p>In Salesforce, open Agent Builder or Agentforce in your sandbox or production org. Make sure your user has the <strong>Manage External Tools</strong> or <strong>Author Apex</strong> permission.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>2. Create a new MCP connection</h3>
+                    <p>Go to <strong>Setup → External Tools</strong> or <strong>Agent Builder → Tools</strong>. Create a new external service and choose the option for a remote MCP endpoint. Select HTTP or Streamable HTTP as the transport.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>3. Enter the server details</h3>
+                    <p>Provide the MCP server configuration:</p>
+                    <ul class="guide-list">
+                        <li>Endpoint URL: <code>https://example.com/mcp</code></li>
+                        <li>Authentication: Bearer token or API key</li>
+                        <li>Optional headers: any tenant or workspace identifiers required by your server</li>
+                    </ul>
+                </div>
+
+                <div class="guide-step">
+                    <h3>4. Save and attach the connection to your agent</h3>
+                    <p>Save the configuration and assign the MCP connection to the specific agent or action that should use it. This is done in the agent's tool or capability settings.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>5. Test inside Salesforce</h3>
+                    <p>Start a conversation with the agent and ask it to invoke the newly connected MCP tools. If the connection is correct, the agent will be able to call the remote MCP server and return the result.</p>
+                </div>
+
+                <div class="guide-callout">
+                    <strong>Tip:</strong> If the agent cannot discover the tools, confirm that the endpoint is reachable from your Salesforce environment and that the auth token has the correct permissions. Salesforce may require you to add the endpoint to a Remote Site Setting first.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI  
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+</body>
+</html>

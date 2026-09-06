@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>Cursor MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/cursor.html" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect a remote MCP server to Cursor using mcp.json." />
+  <meta name="keywords" content="Cursor MCP setup, remote MCP Cursor, Cursor mcp.json, Streamable HTTP MCP" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in Cursor" />
+  <meta property="og:description" content="Learn how to configure and verify a remote MCP server in Cursor." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/cursor.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+    <section id="about" class="content-section">
+      <div class="content-card">
+        <a class="home" href="../index.html">← Back to home</a>
+        <h2>Connecting Remote MCP in Cursor</h2>
+        <p class="guide-intro">Cursor supports remote MCP servers over Streamable HTTP and SSE. This guide uses Cursor's <code>mcp.json</code> configuration and a bearer token example.</p>
+
+        <div class="guide-step">
+          <h3>1. Gather your server details</h3>
+          <p>Get the remote MCP endpoint from your provider, such as <code>https://example.com/mcp</code>. Confirm whether it uses Streamable HTTP or SSE and whether it requires a bearer token or OAuth.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>2. Open Cursor's MCP configuration</h3>
+          <p>For a project-only connection, create or open <code>.cursor/mcp.json</code> in the project root. For a global connection, use <code>~/.cursor/mcp.json</code>. You can also manage servers from Cursor's <strong>Customize</strong> page.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>3. Add the remote server</h3>
+          <p>Add a server entry. Cursor uses <code>url</code> for both remote HTTP and SSE connections:</p>
+          <pre><code>{
+  "mcpServers": {
+    "my-server": {
+      "url": "https://example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MY_MCP_TOKEN}"
+      }
+    }
+  }
+}</code></pre>
+          <p>Set <code>MY_MCP_TOKEN</code> in your environment before starting Cursor. Do not commit a real token to <code>mcp.json</code>.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>4. Trust and enable the server</h3>
+          <p>Restart or reload Cursor so it discovers the server. Review the server configuration and approve the trust prompt. Use the <strong>Customize</strong> page to enable or disable the server and limit available tools.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>5. Test the connection</h3>
+          <p>Open Chat and ask Cursor to use the server by name, for example:</p>
+          <pre><code>Use the my-server tools to inspect the current project status.</code></pre>
+          <p>Approve the tool call when prompted. For connection failures, open the Output panel and select <strong>MCP Logs</strong>.</p>
+        </div>
+
+        <div class="guide-callout">
+          <strong>Tip:</strong> Cursor supports OAuth for remote servers. If your provider uses OAuth, configure the server URL without a static bearer header and complete authentication through Cursor. Register the callback URL required by the Cursor surface you use.
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 • Phloem AI</footer>
+    <footer>Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a></footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/supabase.js"></script>
+</body>
+</html>

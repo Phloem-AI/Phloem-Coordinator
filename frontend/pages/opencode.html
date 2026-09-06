@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>OpenCode MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/opencode.html" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect a remote MCP server to OpenCode." />
+  <meta name="keywords" content="OpenCode MCP setup, remote MCP OpenCode, opencode.json, OpenCode remote server" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in OpenCode" />
+  <meta property="og:description" content="Learn how to configure, authenticate, and verify a remote MCP server in OpenCode." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/opencode.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+    <section id="about" class="content-section">
+      <div class="content-card">
+        <a class="home" href="../index.html">← Back to home</a>
+        <h2>Connecting Remote MCP in OpenCode</h2>
+        <p class="guide-intro">OpenCode supports remote MCP servers and makes their tools available alongside its built-in tools. This guide adds a Streamable HTTP server to a project-level <code>opencode.json</code> file.</p>
+
+        <div class="guide-step">
+          <h3>1. Gather your server details</h3>
+          <p>Get the remote MCP URL, for example <code>https://example.com/mcp</code>, and confirm whether the server uses API-key headers or OAuth authentication.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>2. Open your OpenCode configuration</h3>
+          <p>Create or open <code>opencode.json</code> in the project root. OpenCode also supports a global configuration at <code>~/.config/opencode/opencode.json</code>. Project configuration overrides conflicting global values.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>3. Add the remote server</h3>
+          <p>Add a unique name under the top-level <code>mcp</code> object. Use an environment variable for the token:</p>
+          <pre><code>{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "my-server": {
+      "type": "remote",
+      "url": "https://example.com/mcp",
+      "enabled": true,
+      "oauth": false,
+      "headers": {
+        "Authorization": "Bearer {env:MY_MCP_TOKEN}"
+      }
+    }
+  }
+}</code></pre>
+          <p>Set <code>MY_MCP_TOKEN</code> in the environment used to launch OpenCode. Do not put a real credential in a project file committed to source control.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>4. Authenticate when required</h3>
+          <p>For OAuth-enabled servers, remove the static bearer header and omit <code>oauth: false</code>. OpenCode can discover OAuth automatically, or you can run:</p>
+          <pre><code>opencode mcp auth my-server</code></pre>
+          <p>For a server with pre-registered OAuth credentials, configure its <code>oauth</code> object and reference client values through environment variables.</p>
+        </div>
+
+        <div class="guide-step">
+          <h3>5. Verify and use the tools</h3>
+          <p>Start OpenCode in the project and list the configured servers:</p>
+          <pre><code>opencode mcp list</code></pre>
+          <p>Once connected, ask OpenCode to use the server by name, such as <code>Use the my-server tools to inspect the current project status.</code> Run <code>opencode mcp debug my-server</code> if the connection or OAuth flow fails.</p>
+        </div>
+
+        <div class="guide-callout">
+          <strong>Tip:</strong> OpenCode registers MCP tools with the server name as a prefix. Keep the server name short and clear, and disable unused servers or tools to avoid adding unnecessary context to every session.
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 • Phloem AI</footer>
+    <footer>Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a></footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/supabase.js"></script>
+</body>
+</html>
