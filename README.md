@@ -34,9 +34,23 @@ Get Phloem now through the [website](https://phloem-ai.netlify.app)
 
 ### → Local Setup 
 
+Clone the repository
+
+1. **Frontend**
+
+---
+
+
+
+---
+
+2. **Backend**
+
+---
+
 **Prerequisite:** Install python 
 
-Clone the repo, *cd in backend*, then run ```python -m venv venv```
+*cd in backend*, then run ```python -m venv venv```
 
 Activate the venv, and then run ```pip install -r requirements.txt```
 
