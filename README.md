@@ -34,9 +34,31 @@ Get Phloem now through the [website](https://phloem-ai.netlify.app)
 
 ### → Local Setup 
 
+Clone the repository
+
+---
+
+1. **Frontend**
+
+---
+
+*cd in frontend*, in assets/supabase.js add your:
+
+```supabase_url and supabase_publishable_key``` 
+
+Then from root **frontend/** run ```npx serve .``` or any other method to serve/execute index.html 
+
+This opens up the frontend/website
+
+---
+
+2. **Backend**
+
+---
+
 **Prerequisite:** Install python 
 
-Clone the repo, *cd in backend*, then run ```python -m venv venv```
+*cd in backend*, then run ```python -m venv venv```
 
 Activate the venv, and then run ```pip install -r requirements.txt```
 
