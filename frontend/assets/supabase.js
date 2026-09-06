@@ -1,7 +1,5 @@
-// Load Supabase credentials from environment variables (e.g., via vite-plugin-dotenv or similar)
-/* eslint-disable */
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "your-supabase-url-here";
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY || "your-supabase-key-here";
+const SUPABASE_URL = import.meta.env.SUPABASE_URL || "your-supabase-url-here";
+const SUPABASE_KEY = import.meta.env.SUPABASE_KEY || "your-supabase-key-here";
 
 const supabaseClient = (SUPABASE_URL && SUPABASE_KEY && !SUPABASE_URL.includes("YOUR_PROJECT") && !SUPABASE_KEY.includes("YOUR_"))
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
