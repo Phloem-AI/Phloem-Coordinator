@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>Claude MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/claude.html" />
+    
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect any remote MCP server (HTTP/SSE) to Claude Code and Claude Desktop." />
+  <meta name="keywords" content="remote MCP, Claude MCP setup, Claude Code MCP, Claude Desktop MCP, MCP HTTP server, MCP SSE server" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in Claude Code and Claude Desktop" />
+  <meta property="og:description" content="Learn how to connect any remote MCP server over HTTP or SSE to Claude Code and Claude Desktop." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/claude.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+
+<body>
+    <div class="page-shell">
+
+        <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+        <section id="about" class="content-section">
+            <div class="content-card">
+                <a class="home" href="../index.html">← Back to home</a>
+                <h2>Connecting Remote MCP in Claude Code / Claude Desktop</h2>
+
+                <p class="guide-intro">
+                    Claude Code and Claude Desktop can connect to any remote MCP server over HTTP (Streamable HTTP) or SSE. This guide shows how to add a remote server, authenticate it, and verify the connection.
+                </p>
+
+                <div class="guide-step">
+                    <h3>1. Gather your server details</h3>
+                    <p>Collect the MCP endpoint URL from your server provider. Most remote servers expose a single endpoint, for example <code>https://example.com/mcp</code>. Also note whether the server requires a bearer token, API key, or OAuth sign-in.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>2. Add the server with the CLI</h3>
+                    <p>From your terminal, register the server with Claude Code:</p>
+                    <pre><code># HTTP (Streamable HTTP) — recommended
+claude mcp add --transport http my-server https://example.com/mcp
+
+# With a bearer token
+claude mcp add --transport http my-server https://example.com/mcp \
+  --header "Authorization: Bearer YOUR_TOKEN"
+
+# SSE (deprecated transport)
+claude mcp add --transport sse my-server https://example.com/sse</code></pre>
+                    <p>Claude Code writes the configuration to <code>~/.claude.json</code> (local scope) or <code>.mcp.json</code> (project scope). Use <code>--scope user</code> to make it available across all projects.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>3. Authenticate (if required)</h3>
+                    <p>If the server uses OAuth, open the MCP panel inside a session:</p>
+                    <pre><code>/mcp</code></pre>
+                    <p>Select your server and choose <strong>Authenticate</strong>. Your browser opens to the provider's sign-in page. For servers that accept a static token, pass it with <code>--header</code> at add time instead.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>4. Verify the connection</h3>
+                    <p>Check the server status:</p>
+                    <pre><code>claude mcp list</code></pre>
+                    <p>A <code>✔ Connected</code> status means the server is ready. If you see <code>! Needs authentication</code>, complete the OAuth flow from step 3. If you see <code>✘ Failed to connect</code>, verify the URL with <code>curl -I https://example.com/mcp</code>.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>5. Use the server</h3>
+                    <p>Start a session and ask Claude to use the connected tools. You can reference the server by name to be explicit:</p>
+                    <pre><code>Use the my-server tools to look up information from example.com</code></pre>
+                </div>
+
+                <div class="guide-callout">
+                    <strong>Tip:</strong> Claude Code automatically reconnects HTTP/SSE servers with exponential backoff. For OAuth servers, tokens are stored securely in your system keychain and refreshed automatically. Use <code>claude mcp login &lt;name&gt;</code> to run the OAuth flow from your shell without opening a session.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI  
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+</body>
+</html>

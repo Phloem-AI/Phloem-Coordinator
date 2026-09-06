@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>Linear Agents MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/linear-agents.html" />
+    
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect any remote MCP server (HTTP/SSE) to Linear Agents." />
+  <meta name="keywords" content="remote MCP, Linear Agents MCP setup, Linear MCP integration, MCP HTTP server, MCP SSE server" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in Linear Agents" />
+  <meta property="og:description" content="Learn how to add any remote MCP server over HTTP or SSE to Linear Agents." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/linear-agents.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+
+<body>
+    <div class="page-shell">
+
+        <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+        <section id="about" class="content-section">
+            <div class="content-card">
+                <a class="home" href="../index.html">← Back to home</a>
+                <h2>Connecting Remote MCP in Linear Agents</h2>
+
+                <p class="guide-intro">
+                    Linear Agents can connect to any remote MCP server to bring external tools, data sources, and workflows directly into Linear. This guide covers the setup using Linear's Agent API and OAuth2 authentication.
+                </p>
+
+                <div class="guide-step">
+                    <h3>1. Create a Linear application</h3>
+                    <p>Sign in to Linear and go to <strong>Settings → API → Applications</strong>. Create a new application and enable <strong>Agent session events</strong> webhooks. Note your client ID and client secret.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>2. Configure OAuth scopes</h3>
+                    <p>In your application's OAuth URL, add the <code>actor=app</code> parameter to switch to app installation mode. Request the scopes your MCP server needs. Workspace admins must approve the installation.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>3. Register your MCP server endpoint</h3>
+                    <p>In your agent's configuration, register the remote MCP server endpoint. Linear Agents communicate with MCP servers over HTTP (Streamable HTTP) or SSE. Provide:</p>
+                    <ul class="guide-list">
+                        <li>Endpoint URL: <code>https://example.com/mcp</code></li>
+                        <li>Transport: HTTP or Streamable HTTP</li>
+                        <li>Authentication: Bearer token or OAuth 2.0</li>
+                    </ul>
+                </div>
+
+                <div class="guide-step">
+                    <h3>4. Handle agent session webhooks</h3>
+                    <p>Your agent receives <code>AgentSessionEvent</code> webhooks when mentioned or delegated. Respond within 10 seconds with a <code>thought</code> activity, then use the MCP tools to fulfill the request. Use the <code>promptContext</code> field to construct your agent's prompt from issue details and guidance.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>5. Test the integration</h3>
+                    <p>Mention your agent in a Linear issue or assign an issue to it. The agent should respond using tools from your MCP server. Check the Agent Session UI in Linear to monitor progress.</p>
+                </div>
+
+                <div class="guide-callout">
+                    <strong>Tip:</strong> Linear's Agent Session lifecycle is tracked automatically. Emit <code>action</code> activities for tool calls, <code>response</code> for final answers, and <code>error</code> for failures. Use <code>externalUrls</code> to link back to your agent's dashboard.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI  
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+</body>
+</html>

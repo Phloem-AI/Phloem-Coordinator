@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>Codex MCP Setup Guide | Connect a Remote MCP Server</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/codex.html" />
+    
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+  <meta name="description" content="Step-by-step guide to connect any remote MCP server (HTTP/SSE) to OpenAI Codex CLI and Codex Desktop." />
+  <meta name="keywords" content="remote MCP, Codex MCP setup, Codex CLI MCP, OpenAI Codex MCP, MCP HTTP server, MCP SSE server" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Connect a Remote MCP Server in OpenAI Codex CLI and Desktop" />
+  <meta property="og:description" content="Learn how to connect any remote MCP server over HTTP or SSE to OpenAI Codex CLI and Codex Desktop." />
+  <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Phloem AI" />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/codex.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+
+<body>
+    <div class="page-shell">
+
+        <p class="disclaimer">DISCLAIMER: This guide is for informational purposes only, and does not represent official documentation. Use at your own risk.</p>
+
+        <section id="about" class="content-section">
+            <div class="content-card">
+                <a class="home" href="../index.html">← Back to home</a>
+                <h2>Connecting Remote MCP in Codex (CLI & Desktop)</h2>
+
+                <p class="guide-intro">
+                    OpenAI Codex (CLI and Desktop) can connect to remote MCP servers. This guide covers adding an HTTP or SSE MCP server, authenticating it, and testing the connection.
+                </p>
+
+                <div class="guide-step">
+                    <h3>1. Gather your server details</h3>
+                    <p>Collect the MCP endpoint URL from your server provider. Most remote servers expose a single endpoint, for example <code>https://example.com/mcp</code>. Note whether the server requires a bearer token, API key, or OAuth access token.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>2. Add the server to your Codex configuration</h3>
+                    <p>In Codex CLI or the Desktop app, open the MCP settings and add a new server entry. The configuration uses the same structure as the OpenAI Responses API <code>mcp</code> tool type:</p>
+                    <pre><code>{
+  "mcpServers": {
+    "my-server": {
+      "type": "http",
+      "url": "https://example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_TOKEN"
+      }
+    }
+  }
+}</code></pre>
+                    <p>For OAuth-based servers, omit the <code>headers</code> field and authenticate through the app's MCP panel instead.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>3. Authenticate (if required)</h3>
+                    <p>If the server uses OAuth, open the MCP panel in Codex and click <strong>Authenticate</strong> for your server. Complete the browser sign-in flow. For servers that accept a static token, pass it in the <code>headers</code> field at configuration time.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>4. Restart and verify</h3>
+                    <p>Save the configuration and restart Codex CLI or reopen the Desktop app. The server should appear in your MCP server list with a connected status. If it shows as failed, verify the URL is reachable and the token is valid.</p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>5. Test the connection</h3>
+                    <p>Start a new session and ask Codex to use the connected tools:</p>
+                    <pre><code>Use the my-server tools to look up information from example.com</code></pre>
+                    <p>If the connection works, Codex will invoke the tool and return results.</p>
+                </div>
+
+                <div class="guide-callout">
+                    <strong>Tip:</strong> OpenAI's Responses API supports <code>allowed_tools</code> to restrict which tools from a server are exposed, and <code>require_approval</code> to control whether user approval is needed before each call. Set these in your server configuration to match your security requirements.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+</body>
+</html>

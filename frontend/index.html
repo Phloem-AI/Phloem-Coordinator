@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.jpg" />
+    <title>Phloem AI | Secure Multi-Agent Orchestration &amp; MCP Handoffs</title>
+    <link rel="canonical" href="https://phloem-ai.netlify.app/" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-W1DRVC1WTR');
+    </script>
+
+    <meta name="description" content="Phloem is a secure multi-agent orchestration layer for semantic agent handoffs, AI collaboration, MCP servers, and coordinated agent workflows." />
+    <meta name="keywords" content="multi-agent orchestration, agent collaboration, agent handoffs, agent workflow, MCP server, agent coordination, agent infrastructure, A2A, agent delegation, Phloem AI" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:title" content="Phloem AI | Secure Multi-Agent Orchestration" />
+    <meta property="og:description" content="Secure semantic handoffs and coordinated workflows for AI agents across vendors." />
+    <meta property="og:url" content="https://phloem-ai.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Phloem AI" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Phloem AI | Secure Multi-Agent Orchestration" />
+    <meta name="twitter:description" content="Secure semantic handoffs and coordinated workflows for AI agents across vendors." />
+    <meta name="theme-color" content="#000000" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Phloem AI",
+      "url": "https://phloem-ai.netlify.app/",
+      "description": "Secure multi-agent orchestration layer for semantic agent handoffs and coordinated AI workflows.",
+      "sameAs": ["https://github.com/Phloem-AI/Phloem-core"],
+      "knowsAbout": ["multi-agent orchestration", "agent collaboration", "agent handoffs", "MCP servers", "AI agent coordination", "A2A"]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .page-shell {
+            width: min(1120px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 2rem 0 4rem;
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .github-link {
+            position: absolute;
+            top: 3.5rem;
+            right: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.18);
+            transition: background .2s ease, border-color .2s ease, transform .2s ease;
+            text-decoration: none;
+        }
+
+        .github-tooltip {
+            position: absolute;
+            top: calc(100% + .7rem);
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            width: max-content;
+            max-width: 240px;
+            padding: .55rem .75rem;
+            border: 1px solid rgba(255,255,255,.18);
+            background: #111;
+            color: rgba(255,255,255,.8);
+            font-size: .78rem;
+            line-height: 1.35;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-4px);
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .github-tooltip svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            fill: #fff;
+        }
+
+        .github-link:hover .github-tooltip,
+        .github-link:focus-visible .github-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .github-link:hover {
+            background: rgba(255,255,255,.18);
+            border-color: rgba(255,255,255,.4);
+            transform: scale(1.1);
+        }
+
+        .container {
+            width: 100%;
+            text-align: center;
+            padding: 5rem 2rem;
+            border: 1px solid #333;
+            border-radius: 0;
+            background: #000;
+            box-shadow: none;
+        }
+
+        .logo {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,.22);
+            padding: .45rem .8rem;
+            font-size: .72rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            margin-bottom: 1.7rem;
+            color: rgba(255,255,255,.75);
+            border-radius: 999px;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+            font-weight: 400;
+            color: rgba(255,255,255,.85);
+            margin-bottom: 2rem;
+            line-height: 1.75;
+        }
+
+        p {
+            color: rgba(255,255,255,.72);
+            line-height: 1.8;
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 92px;
+            height: 1px;
+            background: rgba(255,255,255,.2);
+            margin: 2rem auto 1.6rem;
+        }
+
+        footer {
+            margin-top: 2.2rem;
+            color: rgba(255,255,255,.35);
+            font-size: .8rem;
+            text-align: center;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        ::selection {
+            background: #fff;
+            color: #000;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .text-container-link {
+            color: rgba(255,255,255,.92);
+            text-decoration: underline;
+            text-decoration-color: rgba(255,255,255,.5);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color .2s ease, text-decoration-color .2s ease;
+        }
+        .text-container-link:hover,
+        .text-container-link:focus-visible {
+            color: #fff;
+            text-decoration-color: #fff;
+        }
+
+        .btn {
+            padding: .95rem 1.5rem;
+            text-decoration: none;
+            border: 1px solid #444;
+            transition: background .2s ease, color .2s ease;
+            font-size: .95rem;
+            cursor: pointer;
+            border-radius: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            color: #fff;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .guides-list {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .guides-heading {
+            margin-bottom: 2.25rem;
+            color: #fff;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: .02em;
+            line-height: 1.1;
+            text-align: center;
+        }
+
+        .guides-box {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 1rem;
+            width: min(520px, 100%);
+            max-width: 100%;
+            padding: 1.3rem 1.4rem;
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .04);
+            text-decoration: none;
+            color: #fff;
+            transition: transform .2s ease, border-color .2s ease, background .2s ease;
+        }
+
+        .guides-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, .3);
+            background: rgba(255, 255, 255, .08);
+        }
+
+        .guides-box__logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .12);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .guides-box__logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .guides-box__content {
+            text-align: left;
+        }
+
+        .guides-box__title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: .35rem;
+            color: #fff;
+        }
+
+        .guides-box__subtitle {
+            font-size: .95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .72);
+        }
+
+        @media (max-width: 700px) {
+            .page-shell {
+                width: min(100% - 1rem, 1120px);
+                padding: 1rem 0 3rem;
+            }
+
+            .guides-list {
+                display: grid;
+                gap: 1rem;
+                width: 100%;
+                justify-items: center;
+                margin-top: 1.5rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 2rem 0 1rem;
+            }
+
+            .github-link {
+                position: absolute;
+                top: 2.5rem;
+                right: 0.5rem;
+                width: 20px;
+                height: 20px;
+            }
+
+            .container,
+            .content-card {
+                border-radius: 20px;
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn,
+            .waitlist-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-shell">
+        <section class="hero" id="top">
+            <a href="https://github.com/Phloem-AI/Phloem-core" target="_blank" rel="noopener noreferrer" class="github-link" aria-label="View Phloem on GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16" fill="rgba(255,255,255,.7)">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                <span class="github-tooltip">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m12 2.75 2.84 5.75 6.34.92-4.59 4.47 1.08 6.31L12 17.22l-5.67 2.98 1.08-6.31-4.59-4.47 6.34-.92L12 2.75Z"/>
+                    </svg>
+                    Enjoying Phloem? Consider giving it a star.
+                </span>
+            </a>
+            <main class="container">
+                <div class="logo">Offering Early Access</div>
+
+                <h1>PHLOEM AI</h1>
+
+                <p>
+                    Using Multiple AI Agents for different parts of work?
+                </p>
+                <p>
+                     Phloem makes them collaborate autonomously, with secure handoffs. <a href="pages/about.html" class="text-container-link">Learn more</a>
+                </p>
+
+                <div class="divider"></div>
+
+                <div class="hero-buttons">                    
+                    <a href="pages/sign-up.html" class="btn btn-primary">
+                        Get Started
+                    </a>
+
+                    <a href="#about" class="btn btn-secondary">
+                        Guides 
+                    </a>
+                </div>
+
+            </main>
+        </section>
+
+        <section id="about" class="container">
+            <h2 class="guides-heading">Guides</h2>
+            
+            <div class="guides-list">
+                <a href="pages/codex.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/codex.png" alt="Codex"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in Codex</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in Codex.</div>
+                    </div>
+                </a>
+                <a href="pages/claude.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/claude.svg" alt="Claude"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in Claude Code</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in Claude Code.</div>
+                    </div>
+                </a>
+            </div>
+            <div class="guides-list">
+                <a href="pages/vscode-copilot.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/copilot.svg" alt="Copilot"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in VS Code Copilot</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in VS Code Copilot.</div>
+                    </div>
+                </a>
+                <a href="pages/cursor.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/cursor.svg" alt="Cursor"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in Cursor</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in Cursor.</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="guides-list">
+                <a href="pages/linear-agents.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/linear-icon.png" alt="Linear"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in Linear Agents</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in Linear Agent.</div>
+                    </div>
+                </a>
+                <a href="pages/opencode.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/opencode.svg" alt="OpenCode"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in OpenCode</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in OpenCode.</div>
+                    </div>
+                </a>
+            </div>
+            <div class="guides-list">
+                <a href="pages/gemini.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/gemini.svg" alt="Gemini"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in Gemini</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in Gemini.</div>
+                    </div>
+                </a>
+                <a href="pages/salesforce-agent.html" class="guides-box">
+                    <div class="guides-box__logo"><img src="assets/salesforce-icon.png" alt="Salesforce"></div>
+                    <div class="guides-box__content">
+                        <div class="guides-box__title">Connecting Remote MCP in Salesforce Agentforce</div>
+                        <div class="guides-box__subtitle">Guide on setting up MCP connection in Salesforce Agentforce.</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI  
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./assets/supabase.js"></script>
+</body>
+</html>

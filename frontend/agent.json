@@ -1,0 +1,17 @@
+{
+  "name": "Phloem AI",
+  "description": "Secure multi-agent orchestration and semantic handoffs over MCP.",
+  "homepage": "https://phloem-ai.netlify.app/",
+  "repository": "https://github.com/Phloem-AI/Phloem-core",
+  "mcp": {
+    "endpoint": "https://phloem-core.vercel.app/mcp",
+    "transport": "streamable-http"
+  },
+  "documentation": "https://phloem-ai.netlify.app/llms.txt",
+  "guides": [
+    "https://phloem-ai.netlify.app/pages/codex.html",
+    "https://phloem-ai.netlify.app/pages/claude.html",
+    "https://phloem-ai.netlify.app/pages/cursor.html",
+    "https://phloem-ai.netlify.app/pages/gemini.html"
+  ]
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pages/connect.html
+Disallow: /pages/sign-up.html
+
+Sitemap: https://phloem-ai.netlify.app/sitemap.xml

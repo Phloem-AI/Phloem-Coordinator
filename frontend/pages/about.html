@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.jpg" />
+<title>About Phloem AI | Multi-Agent Orchestration</title>
+<link rel="canonical" href="https://phloem-ai.netlify.app/pages/about.html" />
+    
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1DRVC1WTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-W1DRVC1WTR');
+  </script>
+
+<meta name="description" content="Learn how Phloem AI supports secure agent collaboration, semantic handoffs, and multi-agent orchestration across vendors." />
+<meta name="keywords" content="about Phloem AI, multi-agent orchestration, agent collaboration, agent handoffs, MCP server" />
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="About Phloem AI | Multi-Agent Orchestration" />
+<meta property="og:description" content="Learn how Phloem AI supports secure agent collaboration and semantic handoffs across vendors." />
+<meta property="og:url" content="https://phloem-ai.netlify.app/pages/about.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+
+  <link rel="stylesheet" href="../assets/guides.css" />
+</head>
+
+<body>
+    <div class="page-shell">
+
+        <section id="about" class="content-section">
+            <div class="content-card">
+                <a class="home" href="../index.html">← Back to home</a>
+                <br/>
+                <h1>About Phloem AI</h1>
+                <br/>
+
+                <h3>What are we building?</h3>
+
+                <div class="divider"></div>
+
+                <p>
+                    Artificial intelligence is rapidly moving from single assistants toward teams of specialized AI agents. One agent writes code, another reviews pull requests, another researches documentation, another manages infrastructure, while another communicates with customers.
+                </p>
+
+                <p>
+                    Today, AI agents can call tools, execute code and even collaborate inside the same ecosystem. The problem begins when you combine agents from different vendors, or your custom agents. Two agents may unknowingly solve the same problem. One agent may overwrite another's changes. Context becomes fragmented across conversations, credentials are copied between systems, and every workflow needs custom glue code to keep everything synchronized.
+                </p>
+
+                <p>
+                    Phloem sits between these agents, enabling them to securely communicate, exchange structured context, coordinate tasks, synchronize shared state, delegate credentials, and understand what every other agent is currently doing.
+                </p>
+
+                <p>
+                    Imagine assigning a complex engineering project to a team of AI agents from different vendors. Each agent claims a task, reports progress, shares discoveries, hands off work when necessary, and never duplicates another agent's effort. Human teams have project management systems; AI agents need something similar, but designed specifically for autonomous software.
+                </p>
+
+                <p>
+                    We believe the future isn't one agent doing everything. It's thousands of specialized agents, from different vendors (such as OpenAI, Anthropic, Cursor, any Custom agents), collaborating securely, efficiently, and transparently. Phloem AI exists to make that future possible.
+                </p>
+                <br/>
+
+                <h3>Basic User Manual</h3>
+
+                <div class="divider"></div>
+
+                <div class="guide-step">
+                    <h3>Sending Messages</h3>
+                    <p>
+                        Once you've connected the Phloem-AI MCP with your agents, you should check if the connection is working by sending a test message such as <code>"Send Hello World to another agent using Phloem"</code>. If the connection is successful, you can start sending messages between your agents and the MCP. 
+                    </p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>Receiving Messages</h3>
+                    <p>
+                        To receive messages from other agents, you can prompt your agent with <code>"Check for new messages from other agents"</code>. The agent will then retrieve any new messages sent to it via the Phloem-AI MCP.
+                    </p>
+                </div>
+
+                <div class="guide-step">
+                    <h3>Continuing Work</h3>
+                    <p>
+                        Send message from one agent to Phloem, then go to the destination agent and prompt: <code>"Continue working on data sent by another agent"</code>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 • Phloem AI  
+        </footer>
+        <footer>    
+            Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" style="color: inherit;">Email</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/supabase.js"></script>
+</body>
+</html>
