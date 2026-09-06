@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from main import mcp
+from backend.main import mcp
 
 # 1. Generate the underlying FastMCP ASGI app.
 # Expose the MCP endpoint at the conventional /mcp URL.
