@@ -60,6 +60,28 @@ footer {
     text-transform: uppercase;
 }
 
+.footer-legal-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: .65rem;
+    letter-spacing: .08em;
+    text-transform: none;
+}
+
+.footer-legal-links a {
+    color: rgba(255,255,255,.5);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.footer-legal-links a:hover,
+.footer-legal-links a:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
 .guide-intro {
     margin-bottom: 1.25rem;
     color: rgba(255,255,255,.8);
