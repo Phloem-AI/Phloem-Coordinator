@@ -33,6 +33,10 @@
 
     form { display:flex; flex-direction:column; gap:0.75rem; align-items:stretch; max-width:420px; margin: 0.5rem auto 0; }
     input[type=email], input[type=password] { background:#000; color:#fff; border:1px solid #444; padding:12px 14px; font-size:1rem; }
+    .terms-checkbox { display:flex; align-items:flex-start; gap:.65rem; color:rgba(255,255,255,.65); font-size:.85rem; line-height:1.5; text-align:left; }
+    .terms-checkbox input { width:1rem; height:1rem; margin-top:.2rem; accent-color:#fff; flex-shrink:0; }
+    .terms-checkbox a { color:rgba(255,255,255,.92); text-decoration:underline; text-underline-offset:3px; }
+    .terms-checkbox a:hover, .terms-checkbox a:focus-visible { color:#fff; }
     .btn { padding:.95rem 1.5rem; text-decoration:none; border:1px solid #444; transition: background .2s ease, color .2s ease; font-size:.95rem; cursor:pointer; background:transparent; color:#fff; }
     .btn-primary { background:#fff; color:#000; border-color:#fff; }
     .btn-primary:hover { background:transparent; color:#fff; }
@@ -44,6 +48,36 @@
     ::selection {
         background: #fff;
         color: #000;
+    }
+    footer {
+      margin-top: 2.2rem;
+      color: rgba(255,255,255,.35);
+      font-size: .8rem;
+      text-align: center;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .footer-legal-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: .65rem;
+        letter-spacing: .08em;
+        text-transform: none;
+    }
+
+    .footer-legal-links a {
+        color: rgba(255,255,255,.5);
+        text-decoration: none;
+        transition: color .2s ease;
+    }
+
+    .footer-legal-links a:hover,
+    .footer-legal-links a:focus-visible {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
     }
 
 
@@ -64,6 +98,10 @@
           <form id="signup-form">
             <input id="signup-email" type="email" placeholder="you@example.com" required />
             <input id="signup-password" type="password" placeholder="Choose a password" required minlength="6" />
+            <label class="terms-checkbox" for="terms-agreement">
+              <input id="terms-agreement" type="checkbox" required />
+              <span>I agree to the <a href="./terms-of-service.html" target="_blank" rel="noopener noreferrer">Terms of Use</a> and <a href="./privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
+            </label>
             <button id="signup-btn" class="btn btn-primary" type="submit">Create account</button>
           </form>
 
@@ -91,6 +129,14 @@
         <a class="home" href="../index.html">← Back to home</a>
       </main>
     </section>
+
+    <footer>© 2026 • Phloem AI</footer>
+    <footer>Contact • <a href="mailto:qasimhassan1947@gmail.com" target="_blank" rel="noopener noreferrer" style="color: inherit;">Email</a></footer>
+    <nav class="footer-legal-links" aria-label="Legal">
+      <a href="./terms-of-service.html">Terms of Service</a>
+      <span aria-hidden="true">•</span>
+      <a href="./privacy-policy.html">Privacy Policy</a>
+    </nav>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
