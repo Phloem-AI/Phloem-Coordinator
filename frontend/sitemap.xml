@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://phloem-ai.netlify.app/</loc><priority>1.0</priority></url>
   <url><loc>https://phloem-ai.netlify.app/pages/about.html</loc><priority>0.7</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/terms-of-service.html</loc><priority>0.5</priority></url>
+  <url><loc>https://phloem-ai.netlify.app/pages/privacy-policy.html</loc><priority>0.5</priority></url>
   <url><loc>https://phloem-ai.netlify.app/pages/claude.html</loc><priority>0.6</priority></url>
   <url><loc>https://phloem-ai.netlify.app/pages/codex.html</loc><priority>0.6</priority></url>
   <url><loc>https://phloem-ai.netlify.app/pages/cursor.html</loc><priority>0.6</priority></url>
